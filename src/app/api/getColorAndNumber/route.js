@@ -41,8 +41,10 @@ export async function GET(req) {
     // Set Cache-Control header to no-store
     return NextResponse.json(formattedData, {
       headers: {
-        "Cache-Control": "no-store",
-      },
+    "Cache-Control": "no-store, no-cache, must-revalidate, proxy-revalidate",
+    Pragma: "no-cache",
+    Expires: "0",
+  },
     });
   } catch (error) {
     console.error("Error fetching records:", error);
