@@ -1,0 +1,106 @@
+/* Full-width container */
+
+.tableContainer {
+  width: 100vw;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  overflow: hidden;
+}
+
+.Heading {
+  display: flex;
+  justify-content: center;
+  background-color: white;
+  border-bottom: 2px solid blue;
+
+  align-items: center;
+  padding: 0 20px;
+  font-size: 16px;
+  height: 40px;
+}
+
+/* Table styling */
+.table {
+  background-color: white;
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.table th {
+  font-weight: 400;
+  font-size: 16px;
+  color: #666666;
+}
+
+.table th,
+.table td {
+  padding: 10px;
+  font-size: 14px;
+
+  text-align: center;
+  border-bottom: 1px solid #ddd;
+}
+
+.table th {
+  background-color: white;
+}
+
+/* Number styling */
+.evenNumber {
+  color: green;
+}
+
+.oddNumber {
+  color: red;
+}
+
+/* Result styling */
+.resultWin {
+  color: green;
+}
+
+.resultLose {
+  color: red;
+}
+
+/* Pagination styling */
+.pagination {
+  display: flex;
+  justify-content: end;
+  align-items: center;
+  padding-right: 10px !important;
+  background-color: #f9f9f9;
+  font-size: 14px;
+}
+
+.pageButton {
+  background-color: white;
+  border: 1px solid #ddd;
+  border-radius: 50%;
+  padding: 5px 10px;
+  cursor: pointer;
+  font-size: 12px;
+}
+
+/* Mobile screen adjustments */
+@media screen and (max-width: 600px) {
+  .tableContainer {
+    margin: 20px; /* Reduced margin for mobile screens */
+    margin-left: 0; /* Remove left margin */
+    margin-right: 0;
+    width: 100%; /* Ensures full width with margin */
+  }
+
+  .table th,
+  .table td {
+    padding: 8px; /* Slightly smaller padding for mobile screens */
+  }
+
+  .pagination {
+    padding: 8px; /* Adjust pagination padding for mobile */
+  }
+
+  .pageButton {
+    padding: 4px 8px; /* Smaller pagination buttons on mobile */
+  }
+}

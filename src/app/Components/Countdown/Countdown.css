@@ -1,0 +1,122 @@
+.header {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  line-height: 46px;
+
+  width: 100%;
+  background-color: #fff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+.Main-Container {
+  width: 100vw;
+}
+
+.header > div {
+  display: flex;
+  justify-content: center;
+  font-size: 13px;
+  width: 100px;
+  color: #333;
+}
+
+.countdown-number {
+  align-self: center;
+  font-size: 2rem !important;
+}
+
+.period {
+  display: flex;
+  justify-content: space-between;
+}
+
+.period-number {
+  font-family: Helvetica Neue, Helvetica, sans-serif !important;
+}
+
+.main1 {
+  box-sizing: border-box;
+  padding: 10px;
+  width: 100%;
+
+  margin: 0;
+  height: 74px;
+}
+
+.main1 p {
+  font-family: cuIcon;
+  font-size: inherit;
+  font-style: normal;
+}
+
+.period-number {
+  font-size: 1.5em !important;
+}
+
+.countdown-text {
+  padding-right: 10px;
+}
+
+.countdown-number {
+  position: absolute;
+  right: 15px;
+  font-size: 2em;
+  font-family: Helvetica Neue, Helvetica, sans-serif !important;
+}
+
+.period-number {
+  padding-left: 10px;
+  margin-bottom: none;
+}
+
+.btn-clr {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 45px;
+  padding: 10px;
+  width: 100vw; /* Prevent overflow */
+
+  margin-bottom: 12px;
+  margin-top: 12px;
+}
+
+.btn-clr button {
+  height: 35px;
+  border-radius: 6px;
+  border: none;
+  width: 90px;
+  font-size: 12px;
+  color: #fff;
+}
+
+/* Responsive adjustments */
+/* 
+/* For tablets and larger devices */
+
+.btn-clr button {
+  transition: opacity 0.1s ease-in-out; /* Smooth transition */
+}
+
+.btn-clr button:disabled {
+  opacity: 0.1;
+  pointer-events: none;
+}
+
+.category-item {
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.category-item:hover {
+  opacity: 0.7;
+}
+
+.category-item.active {
+  border-bottom: 2px solid #0099ff;
+  color: #0099ff;
+}
+
+.category-item.active {
+  border-bottom: 2px solid blue;
+}

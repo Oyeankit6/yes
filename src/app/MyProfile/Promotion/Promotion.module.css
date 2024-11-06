@@ -1,0 +1,109 @@
+.container {
+  width: 400px;
+
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  background: white;
+
+  padding-top: none;
+  width: 100%;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  height: 41px;
+  background-color: #007bff;
+}
+
+.backArrow {
+  font-size: 18px;
+  cursor: pointer;
+  margin-right: 10px;
+}
+
+.title {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.bonusSection {
+  text-align: center;
+  margin: 10px 0;
+}
+
+.applyButton {
+  background: #007bff;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.levelNavigation {
+  display: flex;
+  justify-content: center;
+  margin: 10px 0;
+  border-bottom: 1px solid #ddd;
+}
+
+.levelTab {
+  padding: 10px 20px;
+  cursor: pointer;
+}
+
+.active {
+  color: #007bff;
+  border-bottom: 2px solid #007bff;
+}
+
+.statistics {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 0;
+  border-bottom: 1px solid #ddd;
+}
+
+.statsItem {
+  text-align: center;
+}
+
+.statsValue {
+  font-size: 20px;
+  color: #007bff;
+}
+
+.promotionDetails {
+  padding: 20px 0;
+  border-bottom: 1px solid #ddd;
+}
+
+.promotionCode,
+.promotionLink {
+  display: block;
+  margin: 5px 0;
+}
+
+.actionButtons {
+  display: flex;
+  justify-content: space-around;
+  padding: 10px 0;
+}
+
+.copyButton,
+.openButton {
+  padding: 10px 20px;
+  cursor: pointer;
+  border: 1px solid #007bff;
+  border-radius: 5px;
+}
+
+.copyButton {
+  background: #f1f1f1;
+}
+
+.openButton {
+  background: #007bff;
+  color: white;
+}

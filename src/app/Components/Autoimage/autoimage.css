@@ -1,0 +1,6 @@
+.Heroimage {
+  object-fit: cover;
+  width: 100%;
+  height: 25rem;
+  transition: transform 1s ease-in-out;
+}

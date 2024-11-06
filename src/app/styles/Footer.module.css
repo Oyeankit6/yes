@@ -1,0 +1,51 @@
+.footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  width: 100vw;
+  height: 70px;
+  background-color: #fff;
+  position: fixed;
+  box-sizing: border-box;
+  left: 0;
+  bottom: 0;
+  z-index: 1;
+  border-top: 1px solid #ddd;
+}
+
+.footer img {
+  height: 1.7rem;
+  opacity: 1;
+  transition: filter 0.3s ease;
+}
+
+.footer .paa {
+  color: #333;
+  margin-top: 0.3rem;
+  font-size: 0.9rem;
+}
+
+.home,
+.search,
+.newGame,
+.win,
+.profile {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.footer div:hover img {
+  filter: drop-shadow(2px 2px 3px blue);
+}
+
+.footer div:hover .paa {
+  color: blue;
+  transition: color 0.3s ease;
+}
+
+.footer a {
+  text-decoration: none;
+  color: inherit;
+}

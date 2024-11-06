@@ -1,0 +1,140 @@
+.profileContainer {
+  display: flex;
+  flex-direction: column;
+  background-color: #f5f5f5;
+  padding: 2px;
+  min-height: 100vh;
+}
+
+.header {
+  border-radius: 2px;
+  background-color: #0099ff;
+  padding: 15px;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  font-size: 14px;
+  margin: 10px;
+}
+
+.link {
+  text-decoration: none; /* Removes underline */
+  color: inherit; /* Keeps the color as per the design */
+}
+
+.icon {
+  margin-right: 10px; /* Adds spacing between the icon and the text */
+}
+
+.userInfo {
+  display: flex;
+  align-items: center;
+  padding: 2px;
+}
+
+.avatar img {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  margin-right: 10px;
+}
+
+.userDetails {
+  line-height: 1.7;
+}
+
+.userName,
+.userId,
+.userMobile,
+.userBalance {
+  font-size: 14px;
+  margin: 2px 0;
+}
+
+.buttons {
+  margin-top: 10px;
+  display: flex;
+  gap: 8px;
+}
+
+.rechargeButton {
+  background-color: #4caf50;
+  color: white;
+  padding: 6px 12px;
+  border: none;
+  border-radius: 4px;
+  font-size: 12px;
+  cursor: pointer;
+}
+
+.changeNameButton {
+  background-color: #e0e0e0;
+  color: #333;
+  padding: 6px 12px;
+  border: none;
+  border-radius: 4px;
+  font-size: 12px;
+  cursor: pointer;
+}
+
+.subMenu {
+  padding-left: 20px; /* Indent the submenu items */
+  background-color: #f9f9f9;
+
+  align-content: center;
+}
+
+.subLink {
+  display: block;
+  padding: 8px 0;
+  color: #333;
+  font-size: 0.95rem;
+  border-bottom: 1px solid #eaeaea;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.subLink:hover {
+  color: #0070f3; /* Change color on hover */
+}
+
+.menu {
+  background-color: #f1f1f1;
+  flex: 1;
+  padding: 10px 20px;
+}
+
+.menuItem {
+  padding: 16px 0;
+  border-bottom: 1px solid #e0e0e0;
+  color: #666;
+  font-size: 14px;
+  display: flex;
+
+  cursor: pointer;
+}
+
+.menuItem:hover {
+  background-color: #f5f5f5;
+}
+
+.logoutContainer {
+  display: flex;
+  justify-content: center;
+  padding: 20px 0;
+}
+
+.logoutButton {
+  background-color: #a0a0a0;
+  color: white;
+  width: 45vw;
+  font-size: 18px;
+  padding: 10px 20px;
+  border: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 4px;
+  cursor: pointer;
+}

@@ -1,0 +1,57 @@
+/* styles/Search.module.css */
+.searchContainer {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.searchBar {
+  width: 50%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 20px;
+  font-size: 16px;
+}
+
+.gridContainer {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 20px;
+  padding: 0 20px;
+}
+
+.productCard {
+  border: 1px solid #eee;
+  border-radius: 10px;
+  padding: 15px;
+  background-color: #fff;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  transition: box-shadow 0.3s ease;
+}
+
+.productCard:hover {
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.productInfo {
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+.productPrice {
+  font-size: 18px;
+  font-weight: bold;
+  color: #ff5722;
+}
+
+.productName {
+  font-size: 14px;
+  color: #666;
+  margin-top: 5px;
+}
+
+.productImage {
+  width: 100%;
+  border-radius: 10px;
+  margin-top: 10px;
+}

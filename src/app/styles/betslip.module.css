@@ -1,0 +1,104 @@
+.dialog {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  visibility: hidden;
+  opacity: 0;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.dialog.open {
+  visibility: visible;
+  opacity: 1;
+}
+
+.container {
+  color: black;
+  height: 352px;
+  width: 348px;
+  background: white;
+  border-radius: 8px;
+  padding: 16px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+}
+
+.heading {
+  color: white;
+  font-weight: 800;
+  background: blue;
+  height: 51px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px 8px 0 0;
+}
+
+.para {
+  color: #666;
+  height: 51px;
+  padding: 25px;
+  height: 15px;
+}
+
+.price {
+  color: #666;
+  display: flex;
+  width: 68%;
+  justify-content: space-around;
+}
+
+.rupee {
+  color: #666;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.rupee.selected {
+  color: blue;
+}
+
+.bet-count {
+  color: #666;
+  display: flex;
+  align-items: center;
+  padding: 25px;
+}
+
+.checkbox {
+  color: #666;
+  display: flex;
+  width: 68%;
+  justify-content: space-around;
+}
+
+.divider {
+  margin: 20px 0;
+}
+
+.btns {
+  display: flex;
+  justify-content: space-around;
+}
+
+.btn {
+  width: 30px;
+  color: black;
+  height: 27px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  background: white;
+  cursor: pointer;
+  font-size: 16px;
+  text-align: center;
+  line-height: 27px;
+}

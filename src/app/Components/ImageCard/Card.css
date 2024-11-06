@@ -1,0 +1,72 @@
+.cards img {
+  height: 15rem;
+  object-fit: contain;
+}
+
+.para {
+  font-size: 0.7rem;
+  text-align: center;
+  color: #666666;
+}
+
+.cards {
+  padding: 5px;
+  border-radius: 6px;
+  width: 46%;
+  margin: 5px 5px;
+  background-size: contain;
+  background-position: 50%;
+  position: relative;
+  z-index: 1;
+  background-color: white;
+}
+
+.price {
+  color: #f37b1d;
+}
+
+.AllCArds {
+  display: flex;
+  flex-wrap: wrap;
+  flex: 2;
+  padding: 0 2px 0;
+  margin-left: 2rem;
+  margin-right: 2rem;
+  margin-bottom: 4.7rem;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .cards {
+    width: 100%; /* Full width on small screens */
+    margin: 5px 0; /* Adjust margin for small screens */
+  }
+
+  .AllCArds {
+    margin-left: 1rem;
+    margin-right: 1rem;
+    padding: 0 1px 0;
+  }
+}
+
+@media (max-width: 480px) {
+  .cards img {
+    height: 10rem; /* Reduce image height on very small screens */
+  }
+
+  .para {
+    font-size: 0.6rem; /* Smaller text on very small screens */
+  }
+
+  .AllCArds {
+    flex-direction: column; /* Stack cards vertically */
+    margin-left: 0.5rem;
+    margin-right: 0.5rem;
+    padding: 0 0.5rem 0;
+  }
+
+  .cards {
+    width: 100%;
+    margin: 10px 0;
+  }
+}

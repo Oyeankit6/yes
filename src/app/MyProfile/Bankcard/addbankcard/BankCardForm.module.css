@@ -1,0 +1,93 @@
+.container {
+  width: 100vw;
+  margin: auto;
+  padding: 20px;
+  border-radius: 8px;
+  background-color: white;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.backButton {
+  background: none;
+  border: none;
+  color: #007bff;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.tabs {
+  display: flex;
+  margin-bottom: 20px;
+}
+
+.tab,
+.activeTab {
+  flex: 1;
+  text-align: center;
+  padding: 10px;
+  border: none;
+  background-color: #f8f8f8;
+  cursor: pointer;
+}
+
+.activeTab {
+  background-color: #007bff;
+  color: white;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+}
+
+/* label {
+  margin-bottom: 10px;
+  font-size: 14px;
+} */
+
+.form input {
+  width: 100%;
+  padding: 10px;
+  margin-top: 5px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.otpSection {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 15px 0;
+}
+
+.otpButton {
+  padding: 10px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.infoText {
+  font-size: 12px;
+  color: gray;
+}
+
+.continueButton {
+  width: 100%;
+  padding: 15px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  font-size: 16px;
+  cursor: pointer;
+  margin-top: 20px;
+}
