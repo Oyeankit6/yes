@@ -11,7 +11,7 @@ const ParityRecordTable = () => {
 
   async function fetchResults() {
     try {
-      const response = await fetch("/api/getColorAndNumber", {
+      const response = await fetch("/api/getColorAndNumber?timestamp=${new Date().getTime()}", {
         method: "GET",
       });
       if (!response.ok) {
