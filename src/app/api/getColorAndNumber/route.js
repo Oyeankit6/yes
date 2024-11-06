@@ -7,7 +7,7 @@ export async function GET(req) {
 
   try {
     const data = await Result.find().sort({ period: -1 }).limit(100); // Fetch only the most recent 100 records
-    // If no data exists, handle the case
+
     if (data.length === 0) {
       return NextResponse.json(
         { message: "No records found" },
@@ -15,7 +15,6 @@ export async function GET(req) {
       );
     }
 
-    // Map the data to format it according to the schema structure
     const formattedData = data.map((record) => ({
       period: record.period,
       results: {
@@ -39,8 +38,12 @@ export async function GET(req) {
       createdAt: record.createdAt,
     }));
 
-    // Return the formatted data as a response
-    return NextResponse.json(formattedData);
+    // Set Cache-Control header to no-store
+    return NextResponse.json(formattedData, {
+      headers: {
+        "Cache-Control": "no-store",
+      },
+    });
   } catch (error) {
     console.error("Error fetching records:", error);
     return NextResponse.json(
