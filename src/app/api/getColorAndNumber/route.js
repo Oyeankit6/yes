@@ -40,8 +40,8 @@ export async function GET(req) {
 
     // Set Cache-Control header to no-store
     return NextResponse.json(formattedData, {
-      headers: {
-    "Cache-Control": "no-store, no-cache, must-revalidate, proxy-revalidate",
+   headers: {
+    "Cache-Control": "no-store, no-cache, must-revalidate, proxy-revalidate, max-age=0",
     Pragma: "no-cache",
     Expires: "0",
   },
