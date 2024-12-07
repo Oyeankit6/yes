@@ -10,6 +10,7 @@ const ParityRecordTable = () => {
     useContext(StoreContext);
 
   async function fetchResults() {
+     setResults([]);
     try {
       const response = await fetch("/api/getColorAndNumber?timestamp=${new Date().getTime()}", {
         method: "GET",
