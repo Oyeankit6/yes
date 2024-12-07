@@ -1,8 +1,13 @@
+
+import Autoimage from "./Components/Autoimage/image";
+import Header from "./Components/Homeheader";
+import Cards from "./Components/ImageCard/ImageCard";
 export default function Home() {
   return (
     <div>
-      <h1>Welcome to the Prediction Game!</h1>
-      {/* You can add other components or content here */}
+ <Header />
+      <Autoimage />
+      <Cards />
     </div>
   );
 }
