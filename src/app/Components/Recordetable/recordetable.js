@@ -76,7 +76,7 @@ const ParityRecordTable = () => {
                         : styles.evenNumber
                     }
                   >
-                    {categoryData.number===""?0:categoryData.number}
+                    {categoryData.number===0?"0":categoryData.number}
                   </td>
                   <td>
                     <span
