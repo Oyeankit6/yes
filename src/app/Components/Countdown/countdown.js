@@ -29,10 +29,7 @@ const ContDown = () => {
 
   useEffect(() => {
     // Connect to the Socket.IO server
-    const socket = io("wss://cashhh.onrender.com", {
-      path: "/socket.io",
-      transports: ["websocket"],
-    });
+    const socket = io("");
 
     socket.on("timer", (data) => {
       console.log("Received data:", data);
