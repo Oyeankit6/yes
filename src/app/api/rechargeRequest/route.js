@@ -32,12 +32,23 @@ export async function GET(req) {
     }
 
     // Return the enriched list of recharge requests with user details
-    return new Response(JSON.stringify(enrichedRequests), { status: 200 });
+    return new Response(JSON.stringify(enrichedRequests), {
+      status: 200,
+      headers: {
+        "Content-Type": "application/json",
+        "Cache-Control": "no-store", // Prevent caching
+        "Pragma": "no-cache", // Prevent caching in HTTP 1.0
+        "Expires": "0", // Ensure no expiration date
+      },
+    });
   } catch (error) {
     console.error("Error fetching recharge requests:", error);
     return new Response(
       JSON.stringify({ message: "Error fetching recharge requests" }),
-      { status: 500 }
+      {
+        status: 500,
+        headers: { "Content-Type": "application/json" },
+      }
     );
   }
 }
