@@ -14,7 +14,7 @@ const Footer = () => {
   return (
     <div className={styles.footer}>
       <div className={styles.home}>
-        <Link href="/Home">
+        <Link href="/">
           <img src={assets.home} alt="Home Icon" />
           <p className={styles.paa}>Home</p>
         </Link>

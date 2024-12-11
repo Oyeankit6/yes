@@ -2,13 +2,15 @@
 
 import React from "react";
 import styles from "./BankCardList.module.css";
+import Link from "next/link";
 
 const BankCardList = () => {
   return (
     <div className={styles.container}>
       {/* Header Section */}
       <div className={styles.header}>
-        <span className={styles.backArrow}>&larr;</span>
+        <span className={styles.backArrow}>&larr; </span>
+
         <span className={styles.title}>Bank Card</span>
         <span className={styles.addIcon}>+</span>
       </div>

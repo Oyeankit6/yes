@@ -1,32 +1,57 @@
-import Stripe from "stripe";
+import { connect } from "@/dbconfig/db.js"; // Database connection utility
+import Recharge from "@/models/rechargeSchema.js"; // Recharge model
+import mongoose from "mongoose"; // Import mongoose to use ObjectId
 
-// Initialize Stripe with your secret key
-const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
-
-// Export a named export for each HTTP method, as required by Next.js app route
+// POST request handler
 export async function POST(req) {
   try {
-    const { amount, paymentMethodType = "card" } = await req.json();
+    const { userId, amount, utrNumber } = await req.json(); // Extract data from the body
 
-    // Create a PaymentIntent with the specified amount and currency
-    const paymentIntent = await stripe.paymentIntents.create({
-      amount: amount * 100, // Stripe requires the amount in the smallest currency unit
-      currency: "usd", // Set the appropriate currency, e.g., "usd" for US dollars
-      payment_method_types: [paymentMethodType], // Specify the desired payment method type
+    // Validate required fields
+    if (!userId || !amount || !utrNumber) {
+      return new Response(
+        JSON.stringify({ message: "Missing required fields." }),
+        { status: 400 }
+      );
+    }
+
+    // Validate that userId is a valid ObjectId format
+    if (!mongoose.Types.ObjectId.isValid(userId)) {
+      return new Response(
+        JSON.stringify({ message: "Invalid userId format." }),
+        { status: 400 }
+      );
+    }
+
+    // Connect to MongoDB
+    await connect();
+
+    // Create a new recharge record
+    const newRecharge = new Recharge({
+      userId: userId, // Ensure userId is in correct format
+      amount,
+      utrNumber,
+      status: "Pending", // Initially set status as "Pending"
     });
 
-    // Return the client secret to the client
+    // Save the new recharge record
+    await newRecharge.save();
+
     return new Response(
-      JSON.stringify({ clientSecret: paymentIntent.client_secret }),
-      { status: 200, headers: { "Content-Type": "application/json" } }
+      JSON.stringify({
+        message: "Recharge request submitted successfully.",
+        recharge: newRecharge,
+      }),
+      { status: 200 }
     );
   } catch (error) {
-    console.error("Error creating payment intent:", error);
-
-    // If there's an error, return a JSON response with the error message
-    return new Response(JSON.stringify({ error: error.message }), {
-      status: 500,
-      headers: { "Content-Type": "application/json" },
-    });
+    console.error("Error processing the recharge:", error);
+    return new Response(
+      JSON.stringify({
+        message: "Error processing the recharge",
+        error: error.message,
+      }),
+      { status: 500 }
+    );
   }
 }

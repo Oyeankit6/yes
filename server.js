@@ -135,7 +135,7 @@ app.prepare().then(() => {
 
   connect().then(async () => {
     await fetchLatestPeriod();
-    const port = process.env.PORT || 3000;
+    const port = process.env.PORT || 8080;
 
     server.listen(port, "0.0.0.0", (err) => {
       if (err) throw err;

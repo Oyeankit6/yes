@@ -1,8 +1,10 @@
-import React, { createContext, useEffect, useState } from "react";
+"use client";
+
+import React, { createContext, useState, useEffect } from "react";
 
 export const StoreContext = createContext(null);
 
-const StoreContextProvider = (props) => {
+const StoreContextProvider = ({ children }) => {
   const [openBetSlip, setOpenBetSlip] = useState(false);
   const [selectedColor, setSelectedColor] = useState("");
   const [selectedNumber, setselectedNumber] = useState("");
@@ -14,16 +16,24 @@ const StoreContextProvider = (props) => {
   const [balance, setBalance] = useState();
   const [remainingTime, setRemainingTime] = useState(0);
   const [activeCategory, setActiveCategory] = useState("Parity");
-  useEffect(() => {
-    const getUser = async () => {
-      let res = await fetch("/api/getUser");
-      res = await res.json();
+  const [rechargeData, setRechargeData] = useState(null);
 
-      setLoggedinUser(res.data);
-      if (res.data.balance) {
-        setBalance(res.data.balance);
+  useEffect(() => {
+    // Simulating API fetch for user data
+    const getUser = async () => {
+      try {
+        const response = await fetch("/api/getUser");
+        const data = await response.json();
+
+        setLoggedinUser(data.data);
+        if (data.data.balance) {
+          setBalance(data.data.balance);
+        }
+      } catch (error) {
+        console.error("Error fetching user data:", error);
       }
     };
+
     getUser();
   }, []);
 
@@ -39,22 +49,24 @@ const StoreContextProvider = (props) => {
     period,
     setPeriod,
     results,
+    setResults,
     bets,
     setBets,
     balance,
     setBalance,
-    setResults,
     loggedinUser,
     setLoggedinUser,
-    activeCategory,
-    setActiveCategory,
     remainingTime,
     setRemainingTime,
+    activeCategory,
+    setActiveCategory,
+    rechargeData,
+    setRechargeData,
   };
 
   return (
     <StoreContext.Provider value={ContextValue}>
-      {props.children}
+      {children}
     </StoreContext.Provider>
   );
 };

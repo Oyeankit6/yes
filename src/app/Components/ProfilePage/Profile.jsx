@@ -71,7 +71,7 @@ const Profile = () => {
               User: member_{loggedinUser?.mobileNumber}
             </p>
             <p className={styles.userId} style={{ padding: "2px" }}>
-              ID: 529814
+              ID:{loggedinUser.userId}
             </p>
           </div>
         </div>

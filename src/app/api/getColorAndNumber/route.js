@@ -3,46 +3,51 @@ import Result from "@/models/publicSchema";
 import { NextResponse } from "next/server";
 
 export async function GET(req) {
-  await connect(); // Ensure database connection is established
+  await connect(); // Ensure database connection
 
   try {
-    const data = await Result.find().sort({ period: -1 }).limit(100); // Fetch only the most recent 100 records
-    // If no data exists, handle the case
-    if (data.length === 0) {
-      return NextResponse.json(
-        { message: "No records found" },
-        { status: 404 }
-      );
-    }
+    // Pagination support
+    const { searchParams } = new URL(req.url);
+    const page = parseInt(searchParams.get("page") || "1", 10);
+    const limit = parseInt(searchParams.get("limit") || "100", 10);
+    const skip = (page - 1) * limit;
 
-    // Map the data to format it according to the schema structure
+    // Fetch and format data
+    const data = await Result.find()
+      .sort({ period: -1 })
+      .skip(skip)
+      .limit(limit);
+
     const formattedData = data.map((record) => ({
       period: record.period,
       results: {
         Parity: {
-          number: record.results.Parity.number,
-          color: record.results.Parity.color,
+          number: record.results?.Parity?.number || null,
+          color: record.results?.Parity?.color || null,
         },
         Sapre: {
-          number: record.results.Sapre.number,
-          color: record.results.Sapre.color,
+          number: record.results?.Sapre?.number || null,
+          color: record.results?.Sapre?.color || null,
         },
         Bcone: {
-          number: record.results.Bcone.number,
-          color: record.results.Bcone.color,
+          number: record.results?.Bcone?.number || null,
+          color: record.results?.Bcone?.color || null,
         },
         Emerd: {
-          number: record.results.Emerd.number,
-          color: record.results.Emerd.color,
+          number: record.results?.Emerd?.number || null,
+          color: record.results?.Emerd?.color || null,
         },
       },
       createdAt: record.createdAt,
     }));
 
-    // Return the formatted data as a response
+    // Return the response
     return NextResponse.json(formattedData);
   } catch (error) {
-    console.error("Error fetching records:", error);
+    console.error("Error fetching records:", {
+      message: error.message,
+      stack: error.stack,
+    });
     return NextResponse.json(
       { message: "Error fetching records" },
       { status: 500 }
