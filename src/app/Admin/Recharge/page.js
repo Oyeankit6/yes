@@ -9,7 +9,7 @@ export default function RechargeRequests() {
 
   useEffect(() => {
     const fetchRequests = async () => {
-      setRequests(null)
+      setRequests([])
       try {
         const response = await fetch("/api/rechargeRequest");
         if (!response.ok) throw new Error("Failed to fetch requests");
