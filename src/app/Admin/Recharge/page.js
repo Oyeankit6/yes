@@ -11,7 +11,13 @@ export default function RechargeRequests() {
     const fetchRequests = async () => {
       setRequests([])
       try {
-        const response = await fetch("/api/rechargeRequest");
+        const response = await fetch("/api/rechargeRequest", {
+  method: "GET",
+  headers: {
+    "Cache-Control": "no-store",
+    Pragma: "no-cache",
+  },
+});
         if (!response.ok) throw new Error("Failed to fetch requests");
         const data = await response.json();
         setRequests(data);
