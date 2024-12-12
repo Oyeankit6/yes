@@ -1,8 +1,10 @@
 "use client";
 import { useState } from "react";
-import styles from "../../styles/RegisterForm.module.css";
+import styles from "../styles/RegisterForm.module.css";
+import { useRouter } from "next/navigation";
 
 const RegisterForm = () => {
+  const router = useRouter();
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
@@ -39,8 +41,12 @@ const RegisterForm = () => {
       if (res.ok) {
         setSuccess("Registration successful!");
         setMobileNumber("+91");
+        setTimeout(() => {
+          router.push("/login");
+        }, 8000);
         setEmail("");
         setPassword("");
+
         setChecked(false);
       } else {
         let result = await res.json();
@@ -56,7 +62,6 @@ const RegisterForm = () => {
   return (
     <div className={styles.container}>
       <header className={styles.header}>
-        +<button className={styles.backButton}>&larr;</button>
         <h1>Register</h1>
       </header>
       <div className={styles.form}>

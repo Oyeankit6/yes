@@ -45,7 +45,6 @@ export default function RechargePage() {
 
   return (
     <div className="recharge-container">
-      {/* Header */}
       <header className="header">
         <button
           className="back-btn"
@@ -56,70 +55,72 @@ export default function RechargePage() {
         <h1>Recharge</h1>
       </header>
 
-      {/* Balance Display */}
-      <h2 className="balance">
-        Balance: ₹{balance !== undefined ? balance : "Loading..."}
-      </h2>
+      <div className="">
+        {/* Balance Display */}
+        <h2 className="balance">
+          Balance: ₹{balance !== undefined ? balance : "Loading..."}
+        </h2>
 
-      {/* Recharge Amount Input */}
-      <input
-        type="number"
-        placeholder="Enter or Select recharge amount"
-        className="recharge-input"
-        value={selectedAmount}
-        onChange={(e) => setSelectedAmount(Number(e.target.value))}
-        min={100}
-        max={50000}
-      />
+        {/* Recharge Amount Input */}
+        <input
+          type="number"
+          placeholder="Enter or Select recharge amount"
+          className="recharge-input"
+          value={selectedAmount}
+          onChange={(e) => setSelectedAmount(Number(e.target.value))}
+          min={100}
+          max={50000}
+        />
 
-      {/* Predefined Amount Buttons */}
-      <div className="amount-buttons">
-        {amounts.map((amount) => (
-          <button
-            key={amount}
-            className={`amount-btn ${
-              selectedAmount === amount ? "selected" : ""
-            }`}
-            onClick={() => setSelectedAmount(amount)}
-          >
-            ₹{amount}
-          </button>
-        ))}
+        {/* Predefined Amount Buttons */}
+        <div className="amount-buttons">
+          {amounts.map((amount) => (
+            <button
+              key={amount}
+              className={`amount-btn ${
+                selectedAmount === amount ? "selected" : ""
+              }`}
+              onClick={() => setSelectedAmount(amount)}
+            >
+              ₹{amount}
+            </button>
+          ))}
+        </div>
+
+        {/* Payment Method Selection */}
+        <div className="payment-methods">
+          <h3>Select Payment Method</h3>
+          {paymentMethods.map((method) => (
+            <label key={method.value}>
+              <input
+                type="radio"
+                name="payment"
+                value={method.value}
+                checked={selectedPaymentMethod === method.value}
+                onChange={() => setSelectedPaymentMethod(method.value)}
+              />
+              {method.label}
+            </label>
+          ))}
+        </div>
+
+        {/* Error Message */}
+        {errorMessage && <p className="error">{errorMessage}</p>}
+
+        {/* Recharge Button */}
+        <button className="recharge-btn" onClick={handleRecharge}>
+          Recharge
+        </button>
+
+        {/* Footer */}
+        <footer className="tips">
+          <p>
+            Tips: Please contact{" "}
+            <a href="mailto:mantrivip@mantrivip.com">mantrivip@mantrivip.com</a>{" "}
+            if you have any questions about the order or payment failure.
+          </p>
+        </footer>
       </div>
-
-      {/* Payment Method Selection */}
-      <div className="payment-methods">
-        <h3>Select Payment Method</h3>
-        {paymentMethods.map((method) => (
-          <label key={method.value}>
-            <input
-              type="radio"
-              name="payment"
-              value={method.value}
-              checked={selectedPaymentMethod === method.value}
-              onChange={() => setSelectedPaymentMethod(method.value)}
-            />
-            {method.label}
-          </label>
-        ))}
-      </div>
-
-      {/* Error Message */}
-      {errorMessage && <p className="error">{errorMessage}</p>}
-
-      {/* Recharge Button */}
-      <button className="recharge-btn" onClick={handleRecharge}>
-        Recharge
-      </button>
-
-      {/* Footer */}
-      <footer className="tips">
-        <p>
-          Tips: Please contact{" "}
-          <a href="mailto:mantrivip@mantrivip.com">mantrivip@mantrivip.com</a>{" "}
-          if you have any questions about the order or payment failure.
-        </p>
-      </footer>
     </div>
   );
 }

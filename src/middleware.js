@@ -4,31 +4,33 @@ export function middleware(request) {
   const path = request.nextUrl.pathname;
   const token = request.cookies.get("token")?.value || "";
 
-  // Use sets for faster membership checking
-  const publicRoutes = new Set(["/Home", "/Search"]);
+  // Define protected and public routes
   const protectedRoutes = new Set(["/MyProfile", "/Win"]);
+  const authRoutes = new Set(["/login", "/Register"]);
 
-  // If no token is present and the path is protected, redirect to login
-  if (!token && protectedRoutes.has(path)) {
-    return NextResponse.redirect(new URL("/MyProfile/login", request.url));
+  // Redirect unauthenticated users trying to access `/MyProfile` to `/register`
+  if (!token && path === "/MyProfile") {
+    return NextResponse.redirect(new URL("/Register", request.url));
   }
 
-  // If token exists and trying to access login or register, redirect to profile
-  if (
-    token &&
-    (path === "/MyProfile/Register" || path === "/MyProfile/login")
-  ) {
+  // Redirect unauthenticated users trying to access other protected routes to `/login`
+  if (!token && protectedRoutes.has(path)) {
+    return NextResponse.redirect(new URL("/login", request.url));
+  }
+
+  // Redirect authenticated users trying to access auth routes to `/MyProfile`
+  if (token && authRoutes.has(path)) {
     return NextResponse.redirect(new URL("/MyProfile", request.url));
   }
 
-  return NextResponse.next(); // Allow the user to proceed to the requested route
+  return NextResponse.next(); // Allow the user to proceed
 }
 
 export const config = {
   matcher: [
-    "/Win/:path*", // Matches any sub-path under /Win
-    "/MyProfile", // Matches /MyProfile
-    "/MyProfile/Register", // Matches /MyProfile/Register
-    "/MyProfile/login", // Matches /MyProfile/login
+    "/Win/:path*", // Protect any sub-paths under /Win
+    "/MyProfile", // Protect /MyProfile
+    "/Register", // Restrict /register to logged-out users
+    "/login", // Restrict /login to logged-out users
   ],
 };

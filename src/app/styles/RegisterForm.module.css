@@ -1,96 +1,133 @@
+/* General Container */
 .container {
   width: 100%;
+  max-width: 420px;
 
-  background-color: #f8f8f8;
-
+  height: 100vh;
+  background-color: #ffffff;
   border-radius: 10px;
+  padding: 30px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  font-family: "Segoe UI", sans-serif;
+  color: #333333;
 }
-.form label {
-  font-size: 18px;
-}
+
+/* Header Section */
 .header {
-  display: flex;
-  align-items: center;
-  background-color: #007bff;
-  padding: 10px;
-  color: white;
-  font-size: 20px;
+  text-align: center;
+  margin-bottom: 20px;
 }
 
-.backButton {
-  background: none;
-  border: none;
-  color: white;
-  font-size: 18px;
-  margin-right: 10px;
+.header h1 {
+  font-size: 1.8rem;
+  font-weight: bold;
+  color: #2c3e50;
+  margin: 0;
 }
 
-.form {
-  margin-top: 20px;
+.header p {
+  font-size: 0.9rem;
+  color: #7f8c8d;
 }
 
+/* Input Groups */
 .inputGroup {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  background-color: white;
-  padding: 10px;
-  border-radius: 5px;
-  margin-bottom: 15px;
+  margin-bottom: 20px;
 }
 
 .inputGroup label {
-  font-size: 14px;
-  flex: 1;
+  display: block;
+  margin-bottom: 8px;
+  font-size: 0.95rem;
+  color: #34495e;
+  font-weight: 600;
 }
 
 .inputGroup input {
   width: 100%;
-  border: none;
-  outline: none;
-  background-color: transparent;
-  padding-left: 5px;
-}
-
-.otpButton {
-  background-color: #007bff;
-  color: white;
-  border: none;
-  padding: 8px 12px;
+  padding: 12px 15px;
+  font-size: 0.95rem;
+  color: #2c3e50;
+  background: #f8f9fa;
+  border: 1px solid #dfe4ea;
   border-radius: 5px;
-  cursor: pointer;
+  outline: none;
+  transition: border 0.3s ease;
 }
 
+.inputGroup input:focus {
+  border: 1px solid #3498db;
+}
+
+/* Privacy Policy */
 .privacyPolicy {
+  font-size: 0.85rem;
+  color: #7f8c8d;
   display: flex;
   align-items: center;
+  gap: 10px;
   margin-bottom: 20px;
 }
 
 .privacyPolicy input {
-  margin-right: 10px;
+  accent-color: #3498db;
+  transform: scale(1.2);
 }
 
 .privacyPolicy a {
-  color: #007bff;
+  color: #3498db;
+  text-decoration: none;
+}
+
+.privacyPolicy a:hover {
   text-decoration: underline;
 }
 
+/* Buttons */
 .buttonBox {
-  width: 100%;
-  display: flex;
-  justify-content: center;
+  text-align: center;
+  margin-top: 20px;
 }
 
 .registerButton {
-  display: flex;
-  justify-content: center;
-  width: 120px;
-  background-color: #007bff;
-  color: white;
-  border: none;
+  width: 100%;
   padding: 12px;
+  font-size: 1rem;
+  font-weight: bold;
+  color: #ffffff;
+  background-color: #3498db;
+  border: none;
   border-radius: 5px;
   cursor: pointer;
-  font-size: 16px;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.registerButton:hover {
+  background-color: #2980b9;
+  transform: translateY(-2px);
+}
+
+/* Back Button */
+.backButton {
+  display: inline-block;
+  margin-bottom: 10px;
+  font-size: 0.9rem;
+  color: #3498db;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.backButton:hover {
+  text-decoration: underline;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .container {
+    padding: 20px;
+  }
+
+  .header h1 {
+    font-size: 1.6rem;
+  }
 }

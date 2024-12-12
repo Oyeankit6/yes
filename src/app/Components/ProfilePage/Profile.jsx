@@ -38,7 +38,7 @@ const Profile = () => {
       });
       if (res.ok) {
         // Redirect to login page after successful logout
-        router.push("/MyProfile/login");
+        router.push("/login");
       }
     } catch (err) {
       console.error("Error logging out:", err);

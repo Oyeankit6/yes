@@ -38,7 +38,7 @@ const Footer = () => {
         </Link>
       </div>
       <div className={styles.profile}>
-        <Link href="/MyProfile/Register">
+        <Link href="/MyProfile">
           <img src={assets.profile} alt="Profile Icon" />
           <p className={styles.paa}>my</p>
         </Link>

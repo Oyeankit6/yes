@@ -2,7 +2,6 @@
 
 import React from "react";
 import styles from "./BankCardList.module.css";
-import Link from "next/link";
 
 const BankCardList = () => {
   return (

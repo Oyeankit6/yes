@@ -13,15 +13,10 @@ export async function GET(req) {
       { userId: 1, name: 1, mobileNumber: 1, email: 1 }
     ); // Fetch necessary fields
 
-    // Return the list of users as JSON with no caching
+    // Return the list of users as JSON
     return new Response(JSON.stringify(users), {
       status: 200,
-      headers: {
-        "Content-Type": "application/json",
-        "Cache-Control": "no-store", // Prevent caching
-        "Pragma": "no-cache", // Prevent caching in HTTP 1.0
-        "Expires": "0", // Ensure no expiration date
-      },
+      headers: { "Content-Type": "application/json" },
     });
   } catch (error) {
     console.error("Error fetching users:", error);
