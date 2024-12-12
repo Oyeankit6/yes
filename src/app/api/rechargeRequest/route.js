@@ -1,54 +1,55 @@
-import { connect } from "@/dbconfig/db.js"; // MongoDB connection function
-import Recharge from "@/models/rechargeSchema.js"; // Recharge model (schema)
-import User from "@/models/userSchema.js"; // User model (schema)
+import { connect } from "@/dbconfig/db.js";
+import Recharge from "@/models/rechargeSchema.js";
+import User from "@/models/userSchema.js";
 
-export async function GET(req) {
+export async function POST(req) {
   try {
-    // Connect to the database
     await connect();
 
-    // Fetch all recharge requests
-    const requests = await Recharge.find();
-
-    // Create an array to store the enriched requests
-    const enrichedRequests = [];
-
-    // Loop through each recharge request and fetch the user details
-    for (const request of requests) {
-      // Fetch the user details for the current request's userId
-      const userDetails = await User.findOne({ userId: request.userId });
-
-      // Check if the user exists and add the user details to the request
-      enrichedRequests.push({
-        userId: request.userId,
-        userEmail: userDetails ? userDetails.email : "Unknown",
-        userPhone: userDetails ? userDetails.mobileNumber : "Unknown",
-        amount: request.amount,
-        utrNumber: request.utrNumber,
-        status: request.status,
-        createdAt: request.createdAt,
-        updatedAt: request.updatedAt,
-      });
+    const { id, amount, status } = await req.json();
+    if (!id || !amount || !status) {
+      return new Response(
+        JSON.stringify({ message: "Invalid input parameters" }),
+        { status: 400 }
+      );
     }
 
-    // Return the enriched list of recharge requests with user details
-    return new Response(JSON.stringify(enrichedRequests), {
-      status: 200,
-      headers: {
-        "Content-Type": "application/json",
-        "Cache-Control": "no-store", // Prevent caching
-        "Pragma": "no-cache", // Prevent caching in HTTP 1.0
-        "Expires": "0", // Ensure no expiration date
-      },
-    });
-  } catch (error) {
-    console.error("Error fetching recharge requests:", error);
+    // Update the recharge request status
+    const rechargeRequest = await Recharge.findOneAndUpdate(
+      { userId: id },
+      { status },
+      { new: true }
+    );
+
+    if (!rechargeRequest) {
+      return new Response(
+        JSON.stringify({ message: "Recharge request not found" }),
+        { status: 404 }
+      );
+    }
+
+    // Update the user's balance if approved
+    let updatedUser = null;
+    if (status === "Approved") {
+      updatedUser = await User.findOneAndUpdate(
+        { userId: id },
+        { $inc: { balance: amount } },
+        { new: true }
+      );
+    }
+
     return new Response(
-      JSON.stringify({ message: "Error fetching recharge requests" }),
-      {
-        status: 500,
-        headers: { "Content-Type": "application/json" },
-      }
+      JSON.stringify({
+        message: `Recharge request ${status} successfully.`,
+        updatedUser,
+      }),
+      { status: 200 }
+    );
+  } catch (error) {
+    console.error("Error updating recharge status:", error);
+    return new Response(
+      JSON.stringify({ message: "Error updating recharge status" }),
+      { status: 500 }
     );
   }
 }
