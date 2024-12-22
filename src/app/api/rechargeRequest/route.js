@@ -1,39 +1,20 @@
-import { connect } from "@/dbconfig/db.js";
-import Recharge from "@/models/rechargeSchema.js";
-import User from "@/models/userSchema.js";
+// pages/api/rechargeRequest.js
+import dbConnect from "@/dbconfig/db"; // Adjust the path as necessary
+import Recharge from "@/models/rechargeSchema"; // Adjust the path as necessary
 
-export async function GET(req) {
-  try {
-    await connect();
+export default async function handler(req, res) {
+  await dbConnect();
 
-    // Fetch recharge requests
-    const requests = await Recharge.find();
-
-    const enrichedRequests = await Promise.all(
-      requests.map(async (request) => {
-        const userDetails = await User.findOne({ userId: request.userId });
-        return {
-          userId: request.userId,
-          userEmail: userDetails?.email || "Unknown",
-          userPhone: userDetails?.mobileNumber || "Unknown",
-          amount: request.amount,
-          utrNumber: request.utrNumber,
-          status: request.status,
-          createdAt: request.createdAt,
-          updatedAt: request.updatedAt,
-        };
-      })
-    );
-
-    return new Response(JSON.stringify(enrichedRequests), {
-      status: 200,
-      headers: { "Content-Type": "application/json" },
-    });
-  } catch (error) {
-    console.error("Error fetching recharge requests:", error);
-    return new Response(
-      JSON.stringify({ message: "Error fetching recharge requests" }),
-      { status: 500 }
-    );
+  if (req.method === "GET") {
+    try {
+      const requests = await Recharge.find();
+      res.status(200).json(requests);
+    } catch (error) {
+      console.error("Error fetching recharge requests:", error);
+      res.status(500).json({ message: "Error fetching recharge requests" });
+    }
+  } else {
+    res.setHeader("Allow", ["GET"]);
+    res.status(405).end(`Method ${req.method} Not Allowed`);
   }
 }
