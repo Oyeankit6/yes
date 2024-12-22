@@ -6,7 +6,6 @@ export async function GET(req) {
   try {
     await connect();
 
-    // Fetch recharge requests
     const requests = await Recharge.find();
 
     const enrichedRequests = await Promise.all(
@@ -27,7 +26,14 @@ export async function GET(req) {
 
     return new Response(JSON.stringify(enrichedRequests), {
       status: 200,
-      headers: { "Content-Type": "application/json" },
+      headers: {
+        "Content-Type": "application/json",
+        "Cache-Control": "no-store",
+        "Pragma": "no-cache",
+        "Expires": "0",
+        "Surrogate-Control": "no-store",
+        "ETag": "",
+      },
     });
   } catch (error) {
     console.error("Error fetching recharge requests:", error);
