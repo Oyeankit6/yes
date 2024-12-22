@@ -1,5 +1,7 @@
 "use client";
+
 import React, { useState, useEffect } from "react";
+import axios from "axios"; // Import Axios for API calls
 import "./RechargeRequests.css"; // Import the external CSS file
 
 export default function RechargeRequests() {
@@ -12,11 +14,13 @@ export default function RechargeRequests() {
     setLoading(true);
     setError(null);
     try {
-      const response = await fetch("/api/rechargeRequest", { method: "GET" });
-      if (!response.ok) throw new Error("Failed to fetch requests");
-      const data = await response.json();
-      setRequests(data);
-    } catch (error) {
+      const response = await axios.get("/api/rechargeRequest", {
+        headers: {
+          "Cache-Control": "no-store", // Ensure fresh data on every request
+        },
+      });
+      setRequests(response.data);
+    } catch (err) {
       setError("Error fetching recharge requests");
     } finally {
       setLoading(false);
@@ -29,24 +33,31 @@ export default function RechargeRequests() {
 
   const handleAction = async (id, amount, action) => {
     try {
-      const response = await fetch("/api/rechargeStatus", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
+      const response = await axios.post(
+        "/api/rechargeStatus",
+        {
+          id,
+          amount,
+          status: action,
         },
-        body: JSON.stringify({ id, amount, status: action }),
-      });
+        {
+          headers: {
+            "Content-Type": "application/json",
+            "Cache-Control": "no-store", // Ensure fresh data
+          },
+        }
+      );
 
-      const result = await response.json();
-
-      if (response.ok) {
-        alert(result.message || `Recharge request ${action} successfully.`);
+      if (response.status === 200) {
+        alert(
+          response.data.message || `Recharge request ${action} successfully.`
+        );
         // Refetch data after successful action
         await fetchRequests();
       } else {
-        alert(result.message || "Error updating recharge status.");
+        alert(response.data.message || "Error updating recharge status.");
       }
-    } catch (error) {
+    } catch (err) {
       alert("An error occurred while updating the recharge status.");
     }
   };
