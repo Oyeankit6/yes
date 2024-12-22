@@ -6,7 +6,6 @@ export async function GET(req) {
   try {
     await connect();
 
-    // Fetch recharge requests
     const requests = await Recharge.find();
 
     const enrichedRequests = await Promise.all(
@@ -29,7 +28,9 @@ export async function GET(req) {
       status: 200,
       headers: {
         "Content-Type": "application/json",
-        "Cache-Control": "no-store, no-cache, must-revalidate", // Disable caching
+        "Cache-Control": "no-store, no-cache, must-revalidate, proxy-revalidate",
+        "Pragma": "no-cache",
+        "Expires": "0",
       },
     });
   } catch (error) {
