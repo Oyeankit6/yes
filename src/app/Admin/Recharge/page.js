@@ -1,5 +1,4 @@
 "use client";
-
 import React, { useState, useEffect } from "react";
 import "./RechargeRequests.css"; // Import the external CSS file
 
@@ -13,16 +12,7 @@ export default function RechargeRequests() {
     setLoading(true);
     setError(null);
     try {
-<<<<<<< HEAD
       const response = await fetch("/api/rechargeRequest", { method: "GET" });
-=======
-      const response = await fetch(`/api/rechargeRequest?_=${Date.now()}`, {
-        method: "GET",
-        headers: {
-          "Cache-Control": "no-store",
-        },
-      });
->>>>>>> 51b398e9c0f8edeaaa21bd6cc200a5b878079d6f
       if (!response.ok) throw new Error("Failed to fetch requests");
       const data = await response.json();
       setRequests(data);
@@ -51,12 +41,8 @@ export default function RechargeRequests() {
 
       if (response.ok) {
         alert(result.message || `Recharge request ${action} successfully.`);
-<<<<<<< HEAD
         // Refetch data after successful action
         await fetchRequests();
-=======
-        await fetchRequests(); // Refetch data after successful action
->>>>>>> 51b398e9c0f8edeaaa21bd6cc200a5b878079d6f
       } else {
         alert(result.message || "Error updating recharge status.");
       }
@@ -65,11 +51,7 @@ export default function RechargeRequests() {
     }
   };
 
-<<<<<<< HEAD
   // Sort requests so that pending requests appear at the top
-=======
-  // Sort requests so pending requests appear at the top
->>>>>>> 51b398e9c0f8edeaaa21bd6cc200a5b878079d6f
   const sortedRequests = requests.sort((a, b) => {
     if (a.status === "Pending" && b.status !== "Pending") return -1;
     if (a.status !== "Pending" && b.status === "Pending") return 1;

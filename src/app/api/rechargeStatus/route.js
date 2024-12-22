@@ -13,24 +13,7 @@ export async function POST(req) {
         JSON.stringify({
           message: "Invalid request. Missing or incorrect parameters.",
         }),
-        { 
-          status: 400,
-          headers: {
-            "Cache-Control": "no-store", // Disable caching
-          }
-        }
-      );
-    }
-
-    if (status === "Approved" && (!amount || amount <= 0)) {
-      return new Response(
-        JSON.stringify({ message: "Invalid amount for approval." }),
-        {
-          status: 400,
-          headers: {
-            "Cache-Control": "no-store", // Disable caching
-          }
-        }
+        { status: 400 }
       );
     }
 
@@ -38,71 +21,55 @@ export async function POST(req) {
     await connect();
 
     // Find the recharge request with "Pending" status
-    const rechargeRequest = await Recharge.findOneAndUpdate(
-      { userId: id, status: "Pending" },
-      { status }, // Update the status
-      { new: true } // Return the updated document
-    );
+    const rechargeRequest = await Recharge.findOne({
+      userId: id,
+      status: "Pending",
+    });
 
+    // Check if the recharge request exists and is "Pending"
     if (!rechargeRequest) {
       return new Response(
         JSON.stringify({ message: "No pending recharge request found." }),
-        {
-          status: 404,
-          headers: {
-            "Cache-Control": "no-store", // Disable caching
-          }
-        }
+        { status: 404 }
       );
     }
+
+    // Update the recharge request status
+    rechargeRequest.status = status; // Update the status
+    await rechargeRequest.save(); // Save the updated recharge request
 
     // Handle "Approved" logic: Update user balance
     if (status === "Approved") {
-      const user = await User.findOneAndUpdate(
-        { userId: id },
-        { $inc: { balance: amount } }, // Increment balance
-        { new: true } // Return the updated document
-      );
+      const user = await User.findOne({ userId: id });
 
       if (!user) {
-        return new Response(
-          JSON.stringify({ message: "User not found." }),
-          {
-            status: 404,
-            headers: {
-              "Cache-Control": "no-store", // Disable caching
-            }
-          }
-        );
+        return new Response(JSON.stringify({ message: "User not found." }), {
+          status: 404,
+        });
       }
 
+      // Update user's balance
+      user.balance += amount;
+      await user.save(); // Save the updated user document
+
+      // Return success with updated recharge request and user balance
       return new Response(
         JSON.stringify({
           message: `Recharge request ${status} successfully.`,
-          request: rechargeRequest,
+          request: rechargeRequest, // Updated recharge request
           updatedUser: { balance: user.balance },
         }),
-        {
-          status: 200,
-          headers: {
-            "Cache-Control": "no-store", // Disable caching
-          }
-        }
+        { status: 200 }
       );
     }
 
-    // Handle "Rejected" logic
+    // Handle "Rejected" logic: Just return the updated recharge request
     return new Response(
       JSON.stringify({
         message: `Recharge request ${status} successfully.`,
         request: rechargeRequest,
       }),
-      {
-        status: 200,
-        headers: {
-          "Cache-Control": "no-store", // Disable caching
-        }
-      }
+      { status: 200 }
     );
   } catch (error) {
     console.error("Error processing recharge status:", error);
@@ -110,12 +77,7 @@ export async function POST(req) {
       JSON.stringify({
         message: "Internal server error. Please try again later.",
       }),
-      {
-        status: 500,
-        headers: {
-          "Cache-Control": "no-store", // Disable caching
-        }
-      }
+      { status: 500 }
     );
   }
 }
