@@ -1,9 +1,9 @@
-// pages/api/rechargeRequest.js
-import dbConnect from "@/dbconfig/db"; // Adjust the path as necessary
-import Recharge from "@/models/rechargeSchema"; // Adjust the path as necessary
+import { connect } from "@/dbconfig/db.js";
+import Recharge from "@/models/rechargeSchema.js";
+import User from "@/models/userSchema.js";
 
 export default async function handler(req, res) {
-  await dbConnect();
+  await connect();
 
   if (req.method === "GET") {
     try {
