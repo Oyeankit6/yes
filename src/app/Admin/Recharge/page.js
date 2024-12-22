@@ -1,29 +1,46 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import axios from "axios"; // Import Axios for API calls
-import "./RechargeRequests.css"; // Import the external CSS file
+import axios from "axios";
+import "./RechargeRequests.css";
 
 export default function RechargeRequests() {
   const [requests, setRequests] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(1);
 
-  // Function to fetch recharge requests
-  const fetchRequests = async () => {
+  const fetchRequests = async (page = 1) => {
     setLoading(true);
     setError(null);
     try {
-      const response = await axios.get("/api/rechargeRequest", {
-        headers: {
-          "Cache-Control": "no-store", // Ensure fresh data on every request
-        },
-      });
-      setRequests(response.data);
+      const response = await axios.get(
+        `/api/rechargeRequest?page=${page}&limit=10`
+      );
+      setRequests(response.data.requests);
+      setTotalPages(response.data.totalPages);
+      setCurrentPage(response.data.currentPage);
     } catch (err) {
-      setError("Error fetching recharge requests");
+      setError("Failed to fetch recharge requests. Please try again.");
     } finally {
       setLoading(false);
+    }
+  };
+
+  const handleAction = async (id, amount, status) => {
+    try {
+      const response = await axios.post("/api/rechargeStatus", {
+        id,
+        amount,
+        status,
+      });
+      if (response.status === 200) {
+        alert(`Recharge request ${status.toLowerCase()} successfully!`);
+        fetchRequests(currentPage);
+      }
+    } catch (err) {
+      alert("Failed to update recharge status. Please try again.");
     }
   };
 
@@ -31,113 +48,99 @@ export default function RechargeRequests() {
     fetchRequests();
   }, []);
 
-  const handleAction = async (id, amount, action) => {
-    try {
-      const response = await axios.post(
-        "/api/rechargeStatus",
-        {
-          id,
-          amount,
-          status: action,
-        },
-        {
-          headers: {
-            "Content-Type": "application/json",
-            "Cache-Control": "no-store", // Ensure fresh data
-          },
-        }
-      );
-
-      if (response.status === 200) {
-        alert(
-          response.data.message || `Recharge request ${action} successfully.`
-        );
-        // Refetch data after successful action
-        await fetchRequests();
-      } else {
-        alert(response.data.message || "Error updating recharge status.");
-      }
-    } catch (err) {
-      alert("An error occurred while updating the recharge status.");
-    }
-  };
-
-  // Sort requests so that pending requests appear at the top
-  const sortedRequests = requests.sort((a, b) => {
-    if (a.status === "Pending" && b.status !== "Pending") return -1;
-    if (a.status !== "Pending" && b.status === "Pending") return 1;
-    return 0; // Maintain original order for other statuses
-  });
-
-  if (loading) return <div>Loading...</div>;
-  if (error) return <div>{error}</div>;
-
   return (
-    <div className="container">
-      <header className="header">
-        <h1>Recharge Requests</h1>
-        <p>Manage recharge requests submitted by users</p>
-      </header>
-
-      <main className="main">
-        <table className="requests-table">
-          <thead>
-            <tr>
-              <th>#</th>
-              <th>User ID</th>
-              <th>User Number</th>
-              <th>Email</th>
-              <th>Amount (₹)</th>
-              <th>Status</th>
-              <th>Action</th>
-            </tr>
-          </thead>
-          <tbody>
-            {sortedRequests.map((request, index) => (
-              <tr key={request.userId}>
-                <td>{index + 1}</td>
-                <td>{request.userId}</td>
-                <td>{request.userPhone}</td>
-                <td>{request.userEmail}</td>
-                <td>{request.amount}</td>
-                <td className={`status ${request.status.toLowerCase()}`}>
-                  {request.status}
-                </td>
-                <td>
-                  {request.status === "Pending" && (
-                    <div className="actions">
-                      <button
-                        className="btn approve"
-                        onClick={() =>
-                          handleAction(
-                            request.userId,
-                            request.amount,
-                            "Approved"
-                          )
-                        }
-                      >
-                        Approve
-                      </button>
-                      <button
-                        className="btn reject"
-                        onClick={() =>
-                          handleAction(
-                            request.userId,
-                            request.amount,
-                            "Rejected"
-                          )
-                        }
-                      >
-                        Reject
-                      </button>
-                    </div>
-                  )}
-                </td>
+    <div className="recharge-container">
+      <h1 className="recharge-title">Recharge Requests</h1>
+      {loading ? (
+        <div className="loading">Loading...</div>
+      ) : error ? (
+        <div className="error">{error}</div>
+      ) : (
+        <>
+          <table className="recharge-table">
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>User ID</th>
+                <th>Phone</th>
+                <th>Email</th>
+                <th>Amount (₹)</th>
+                <th>utrNumber</th>
+                <th>Status</th>
+                <th>Actions</th>
               </tr>
+            </thead>
+            <tbody>
+              {requests.map((request, index) => (
+                <tr key={request._id}>
+                  <td>{(currentPage - 1) * 10 + index + 1}</td>
+                  <td>{request.userId || "N/A"}</td>
+                  <td>{request.userPhone || "N/A"}</td>
+                  <td>{request.userEmail || "N/A"}</td>
+                  <td>{request.amount}</td>
+                  <td>{request.utrNumber}</td>
+                  <td>
+                    <span
+                      className={`status ${
+                        request.status === "Approved"
+                          ? "status-approved"
+                          : request.status === "Rejected"
+                          ? "status-rejected"
+                          : "status-pending"
+                      }`}
+                    >
+                      {request.status}
+                    </span>
+                  </td>
+                  <td>
+                    {request.status === "Pending" && (
+                      <div className="action-buttons">
+                        <button
+                          className="btn btn-approve"
+                          onClick={() =>
+                            handleAction(
+                              request.userId,
+                              request.amount,
+                              "Approved"
+                            )
+                          }
+                        >
+                          Approve
+                        </button>
+                        <button
+                          className="btn btn-reject"
+                          onClick={() =>
+                            handleAction(
+                              request.userId,
+                              request.amount,
+                              "Rejected"
+                            )
+                          }
+                        >
+                          Reject
+                        </button>
+                      </div>
+                    )}
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+          <div className="pagination">
+            {Array.from({ length: totalPages }).map((_, index) => (
+              <button
+                key={index}
+                className={`page-btn ${
+                  currentPage === index + 1 ? "active" : ""
+                }`}
+                onClick={() => fetchRequests(index + 1)}
+              >
+                {index + 1}
+              </button>
             ))}
-          </tbody>
-        </table>
-      </main>
+          </div>
+        </>
+      )}
     </div>
   );
 }
