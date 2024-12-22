@@ -1,97 +1,214 @@
-/* RechargeRequests.css */
-
-.container {
+/* General Styles */
+.recharge-container {
+  width: 100%;
   max-width: 1200px;
-  margin: 2rem auto;
-  padding: 1rem;
-}
-
-.header {
-  text-align: center;
-  background-color: #1e3a8a;
-  color: white;
-  padding: 1rem;
+  margin: 0 auto;
+  padding: 20px;
+  font-family: Arial, sans-serif;
+  background-color: #f9f9f9;
   border-radius: 8px;
 }
 
-.main {
-  margin-top: 2rem;
+.recharge-title {
+  font-size: 28px;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 20px;
+  text-align: center;
 }
 
-.requests-table {
+.loading,
+.error {
+  text-align: center;
+  font-size: 18px;
+  color: #ff5722;
+  margin: 20px 0;
+}
+
+.loading {
+  color: #3f51b5;
+}
+
+.recharge-table {
   width: 100%;
   border-collapse: collapse;
-  margin-bottom: 1rem;
-  background: white;
+  margin-bottom: 20px;
+  background-color: #fff;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
   border-radius: 8px;
-  overflow: hidden;
 }
 
-.requests-table th,
-.requests-table td {
-  text-align: left;
-  padding: 0.75rem;
-  border: 1px solid #dbeafe;
+.recharge-table th,
+.recharge-table td {
+  padding: 12px;
+  text-align: center;
+  border-bottom: 1px solid #f2f2f2;
+  font-size: 16px;
 }
 
-.requests-table th {
-  background: #1e3a8a;
-  color: white;
+.recharge-table th {
+  background-color: #f4f4f4;
+  font-weight: bold;
+  color: #333;
+}
+
+.recharge-table tr:hover {
+  background-color: #f9f9f9;
 }
 
 .status {
-  font-weight: bold;
-  text-transform: capitalize;
+  display: inline-block;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-weight: 600;
 }
 
-.status.pending {
-  color: #f59e0b; /* Yellow */
+.status-approved {
+  background-color: #4caf50;
+  color: white;
 }
 
-.status.approved {
-  color: #10b981; /* Green */
+.status-rejected {
+  background-color: #f44336;
+  color: white;
 }
 
-.status.rejected {
-  color: #ef4444; /* Red */
+.status-pending {
+  background-color: #ff9800;
+  color: white;
 }
 
-.actions {
+.action-buttons {
   display: flex;
-  gap: 0.5rem;
+  justify-content: center;
+  gap: 10px;
 }
 
 .btn {
+  padding: 8px 16px;
+  font-size: 14px;
+  font-weight: 600;
   border: none;
-  padding: 0.5rem 1rem;
   border-radius: 4px;
-  font-size: 0.9rem;
   cursor: pointer;
-  transition: all 0.3s ease;
+  transition: background-color 0.3s ease;
 }
 
-.btn.approve {
-  background-color: #10b981; /* Green */
+.btn-approve {
+  background-color: #4caf50;
   color: white;
 }
 
-.btn.approve:hover {
-  background-color: #059669; /* Darker Green */
+.btn-approve:hover {
+  background-color: #45a049;
 }
 
-.btn.reject {
-  background-color: #ef4444; /* Red */
+.btn-reject {
+  background-color: #f44336;
   color: white;
 }
 
-.btn.reject:hover {
-  background-color: #dc2626; /* Darker Red */
+.btn-reject:hover {
+  background-color: #e53935;
 }
 
+.pagination {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.page-btn {
+  padding: 8px 16px;
+  font-size: 16px;
+  font-weight: 600;
+  margin: 0 5px;
+  background-color: #e0e0e0;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.page-btn.active {
+  background-color: #3f51b5;
+  color: white;
+}
+
+.page-btn:hover {
+  background-color: #bdbdbd;
+}
+
+/* Responsive Styles */
 @media (max-width: 768px) {
-  .requests-table th,
-  .requests-table td {
-    font-size: 0.9rem;
-    padding: 0.5rem;
+  .recharge-container {
+    padding: 15px;
+  }
+
+  .recharge-title {
+    font-size: 24px;
+  }
+
+  .recharge-table th,
+  .recharge-table td {
+    padding: 10px;
+    font-size: 14px;
+  }
+
+  .action-buttons {
+    flex-direction: column;
+  }
+
+  .btn {
+    padding: 6px 12px;
+    font-size: 12px;
+  }
+
+  .pagination {
+    flex-direction: column;
+  }
+
+  .page-btn {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 5px;
+  }
+}
+
+@media (max-width: 480px) {
+  .recharge-container {
+    padding: 10px;
+  }
+
+  .recharge-title {
+    font-size: 20px;
+  }
+
+  .recharge-table th,
+  .recharge-table td {
+    padding: 8px;
+    font-size: 12px;
+  }
+
+  .action-buttons {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .btn {
+    padding: 6px 12px;
+    font-size: 12px;
+  }
+
+  .pagination {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .page-btn {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 5px;
+    font-size: 14px;
   }
 }
