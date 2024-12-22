@@ -10,6 +10,7 @@ export default function AdminDashboard() {
   useEffect(() => {
     async function fetchUsers() {
       try {
+        setLoading(true); // Start loading before the request
         const response = await fetch("/api/Allusers", { method: "GET" }); // Replace with your API endpoint
 
         if (!response.ok) {
@@ -18,7 +19,6 @@ export default function AdminDashboard() {
 
         const data = await response.json();
         setUsers(data); // Set the fetched user data
-        console.log(data);
       } catch (err) {
         setError(err.message); // Handle errors
       } finally {
@@ -26,8 +26,14 @@ export default function AdminDashboard() {
       }
     }
 
-    fetchUsers();
-  }, []);
+    fetchUsers(); // Fetch the data initially
+
+    // Optional: Use a setInterval to refresh data every 5 minutes (300000 ms)
+    const interval = setInterval(fetchUsers, 300000);
+
+    // Clean up the interval when the component unmounts
+    return () => clearInterval(interval);
+  }, []); // Empty dependency array means this effect runs once on mount
 
   return (
     <div className="container">
