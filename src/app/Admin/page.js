@@ -1,6 +1,7 @@
 import Head from "next/head";
 import "./Admin.css";
 import Link from "next/link";
+
 export default function Home() {
   return (
     <>
@@ -38,6 +39,7 @@ export default function Home() {
           <section id="features" className="features">
             <h2>Why Choose Us?</h2>
             <div className="features-grid">
+              {/* Recharge Requests Card */}
               <div className="feature-card">
                 <img
                   src="https://tse4.mm.bing.net/th?id=OIP.VjQ-wf2AQ8b-eRdDe5LG5QHaGW&pid=Api&P=0&h=180"
@@ -48,20 +50,27 @@ export default function Home() {
                 </Link>
                 <p>Your money and data are safe with us.</p>
               </div>
+              {/* Total Users Card */}
               <div className="feature-card">
                 <img
                   src="https://tse3.mm.bing.net/th?id=OIP.isMiRzNuox6kx5IuWDJO3QHaHa&pid=Api&P=0&h=180"
                   alt="Best Odds"
                 />
                 <h3>
-                  <Link href="/Admin/Totalusers">TotaL Users</Link>
+                  <Link href="">Total Users</Link>
                 </h3>
                 <p>Competitive odds to maximize your winnings.</p>
               </div>
+              {/* Withdrawal Requests Card */}
               <div className="feature-card">
-                <img src="/icon-support.png" alt="Support" />
-                <h3>24/7 Support</h3>
-                <p>We're here to help you anytime.</p>
+                <img
+                  src="https://tse4.mm.bing.net/th?id=OIP.DqUKQbIgdbnrTb0rBcizsAHaHa&pid=Api&P=0&h=180"
+                  alt="Withdrawals"
+                />
+                <Link href="/Admin/Withdrawal">
+                  <h3>Withdrawal Requests</h3>
+                </Link>
+                <p>Manage all user withdrawal requests in one place.</p>
               </div>
             </div>
           </section>
@@ -80,13 +89,13 @@ export default function Home() {
               <p>Phone: +123 456 7890</p>
               <div className="social-icons">
                 <a href="#">
-                  <img src="/icon-facebook.png" alt="Facebook" />
+                  <img src="/" alt="Facebook" />
                 </a>
                 <a href="#">
-                  <img src="/icon-twitter.png" alt="Twitter" />
+                  <img src="/" alt="Twitter" />
                 </a>
                 <a href="#">
-                  <img src="/icon-instagram.png" alt="Instagram" />
+                  <img src="/" alt="Instagram" />
                 </a>
               </div>
             </div>

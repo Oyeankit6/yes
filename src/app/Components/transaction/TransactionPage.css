@@ -1,0 +1,122 @@
+.transaction-container {
+  width: 90%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+  margin-bottom: 100px;
+}
+
+.transaction-header {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.transaction-header h1 {
+  font-size: 2rem;
+  font-weight: bold;
+  color: #333;
+}
+
+.transaction-list {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.transaction-item {
+  display: flex;
+  background-color: #f9f9f9;
+  padding: 15px;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  align-items: center;
+}
+
+.transaction-icon {
+  font-size: 30px;
+  color: #0070f3;
+  margin-right: 20px;
+}
+
+.transaction-wallet-icon {
+  font-size: 30px;
+}
+
+.transaction-wallet-icon.success {
+  color: #4caf50; /* Green for success */
+}
+
+.transaction-wallet-icon.failed {
+  color: #f44336; /* Red for failed */
+}
+
+.transaction-wallet-icon.wait {
+  color: #ff9800; /* Orange for wait */
+}
+
+.transaction-details {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.transaction-amount-status {
+  display: flex;
+  justify-content: space-between;
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+
+.transaction-amount {
+  color: #0070f3;
+}
+
+.transaction-status {
+  text-transform: capitalize;
+  padding: 5px 10px;
+  border-radius: 20px;
+}
+
+.transaction-status.success {
+  background-color: #4caf50;
+  color: white;
+}
+
+.transaction-status.failed {
+  background-color: #f44336;
+  color: white;
+}
+
+.transaction-status.wait {
+  background-color: #ff9800;
+  color: white;
+}
+
+.transaction-meta {
+  margin-top: 10px;
+  font-size: 0.9rem;
+  color: #666;
+}
+
+.transaction-meta p {
+  margin: 5px 0;
+}
+
+.transaction-utr,
+.transaction-time,
+.transaction-id {
+  font-size: 0.95rem;
+}
+
+.transaction-utr strong,
+.transaction-time strong,
+.transaction-id strong {
+  font-weight: bold;
+}
+
+.loading,
+.error {
+  text-align: center;
+  font-size: 1.5rem;
+  color: #333;
+}

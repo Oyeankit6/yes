@@ -45,6 +45,7 @@
 
 /* Balance */
 .balance {
+  padding-top: 10px;
   font-size: 1.5rem;
   color: #27ae60;
   font-weight: bold;
@@ -178,7 +179,8 @@
 /* Responsive Design */
 @media (max-width: 768px) {
   .amount-btn {
-    padding: 0.5rem 1rem;
+    padding-top: 0;
+    padding-bottom: 20px;
     font-size: 0.9rem;
   }
 
@@ -193,7 +195,7 @@
 
 @media (max-width: 480px) {
   .recharge-container {
-    padding: 1.5rem;
+    padding: 0;
   }
 
   .header h1 {

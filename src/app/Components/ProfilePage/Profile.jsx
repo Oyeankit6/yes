@@ -144,10 +144,7 @@ const Profile = () => {
         </div>
         {bankCardExpanded && (
           <div className={styles.subMenu}>
-            <Link
-              href="/MyProfile/Bankcard/addbankcard"
-              className={styles.subLink}
-            >
+            <Link href="/MyProfile/Bankcard" className={styles.subLink}>
               <div>Add Bank Card</div>
             </Link>
           </div>

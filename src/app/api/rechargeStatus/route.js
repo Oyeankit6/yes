@@ -7,8 +7,16 @@ export async function POST(req) {
     // Parse the request body
     const { id, amount, status } = await req.json();
 
+    // Log incoming request data for debugging
+    console.log("Received request data:", { id, amount, status });
+
     // Validate input data
-    if (!id || !status || !["Approved", "Rejected"].includes(status)) {
+    if (
+      !id ||
+      !amount ||
+      !status ||
+      !["Approved", "Rejected"].includes(status)
+    ) {
       return new Response(
         JSON.stringify({
           message: "Invalid request. Missing or incorrect parameters.",

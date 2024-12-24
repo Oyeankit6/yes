@@ -1,11 +1,13 @@
 "use client";
 
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { useRouter } from "next/navigation";
 import "./recharge.css";
+import { StoreContext } from "@/app/Context/AccountContext";
 
 export default function RechargePage() {
-  const balance = 1000; // Example balance, replace with actual balance if needed
+  const { loggedinUser } = useContext(StoreContext);
+  const balance = loggedinUser.balance; // Example balance, replace with actual balance if needed
   const [selectedAmount, setSelectedAmount] = useState("");
   const [selectedPaymentMethod, setSelectedPaymentMethod] =
     useState("superpay");
@@ -53,6 +55,7 @@ export default function RechargePage() {
           ←
         </button>
         <h1>Recharge</h1>
+        <h3>History</h3>
       </header>
 
       <div className="">
