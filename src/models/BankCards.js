@@ -14,7 +14,6 @@ const PaymentDetailSchema = new mongoose.Schema(
     },
     bankDetails: {
       name: {
-        unique: true,
         type: String,
         required: function () {
           return this.type === "bank";
@@ -33,6 +32,8 @@ const PaymentDetailSchema = new mongoose.Schema(
         },
       },
       accountNumber: {
+        unique: true,
+        sparse: true, // Allows multiple nulls
         type: String,
         required: function () {
           return this.type === "bank";
@@ -53,8 +54,9 @@ const PaymentDetailSchema = new mongoose.Schema(
     },
     upiDetails: {
       upiId: {
-        type: String,
         unique: true,
+        sparse: true, // Allows multiple nulls
+        type: String,
         required: function () {
           return this.type === "upi";
         },
