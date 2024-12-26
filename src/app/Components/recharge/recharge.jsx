@@ -54,8 +54,7 @@ export default function RechargePage() {
         >
           ←
         </button>
-        <h1>Recharge</h1>
-        <h3>History</h3>
+        <h3>Recharge</h3>
       </header>
 
       <div className="">
@@ -89,10 +88,17 @@ export default function RechargePage() {
             </button>
           ))}
         </div>
+        <footer className="tips">
+          <p style={{ backgroundColor: "white" }}>
+            Tips: Please contact{" "}
+            <a href="mailto:mantrivip@mantrivip.com">mantrivip@mantrivip.com</a>{" "}
+            if you have any questions about the order or payment failure.
+          </p>
+        </footer>
 
         {/* Payment Method Selection */}
         <div className="payment-methods">
-          <h3>Select Payment Method</h3>
+          <h3 style={{ backgroundColor: "#ffffff" }}>Select Payment Method</h3>
           {paymentMethods.map((method) => (
             <label key={method.value}>
               <input
@@ -102,7 +108,7 @@ export default function RechargePage() {
                 checked={selectedPaymentMethod === method.value}
                 onChange={() => setSelectedPaymentMethod(method.value)}
               />
-              {method.label}
+              <p className="gpay"> {method.label}</p>
             </label>
           ))}
         </div>
@@ -111,18 +117,14 @@ export default function RechargePage() {
         {errorMessage && <p className="error">{errorMessage}</p>}
 
         {/* Recharge Button */}
-        <button className="recharge-btn" onClick={handleRecharge}>
-          Recharge
-        </button>
+
+        <div className="btncont">
+          <button className="recharge-btn" onClick={handleRecharge}>
+            Recharge
+          </button>
+        </div>
 
         {/* Footer */}
-        <footer className="tips">
-          <p>
-            Tips: Please contact{" "}
-            <a href="mailto:mantrivip@mantrivip.com">mantrivip@mantrivip.com</a>{" "}
-            if you have any questions about the order or payment failure.
-          </p>
-        </footer>
       </div>
     </div>
   );

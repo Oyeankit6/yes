@@ -3,9 +3,11 @@ import React, { useEffect, useState, useContext } from "react";
 import { StoreContext } from "@/app/Context/AccountContext";
 import axios from "axios";
 import { FaWallet } from "react-icons/fa";
+import { useRouter } from "next/navigation"; // Updated import for the App Router
 import "./TransactionPage.css";
 
 const TransactionPage = () => {
+  const router = useRouter(); // Using useRouter from next/navigation
   const { loggedinUser } = useContext(StoreContext); // Context for logged-in user
   const [transactions, setTransactions] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -41,24 +43,26 @@ const TransactionPage = () => {
   if (loading) return <div className="loading">Loading...</div>;
   if (error) return <div className="error">{error}</div>;
 
-  // Function to map status values to user-friendly labels
   const getStatusLabel = (status) => {
     switch (status) {
       case "Approved":
-        return "Success"; // Approved transactions are marked as "Success"
+        return "Success";
       case "Rejected":
-        return "Failed"; // Rejected transactions are marked as "Failed"
+        return "Failed";
       case "Pending":
-        return "Wait"; // Pending transactions are marked as "Wait"
+        return "Wait";
       default:
-        return "Unknown"; // Default for undefined statuses
+        return "Unknown";
     }
   };
 
   return (
     <div className="transaction-container">
       <header className="transaction-header">
-        <h1>Transaction Records</h1>
+        <button className="back-button" onClick={() => router.back()}>
+          ←
+        </button>
+        <h4>Recharge Record</h4>
       </header>
 
       <div className="transaction-list">
@@ -86,11 +90,7 @@ const TransactionPage = () => {
                   </span>
                 </div>
                 <div className="transaction-meta">
-                  <p className="transaction-utr">
-                    <strong>UTR Number:</strong> {transaction.utrNumber}
-                  </p>
                   <p className="transaction-time">
-                    <strong>Recharge Time:</strong>{" "}
                     {new Date(transaction.createdAt).toLocaleString()}
                   </p>
                 </div>

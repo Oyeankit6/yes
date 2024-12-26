@@ -4,8 +4,7 @@ import styles from "./Promotion.module.css";
 
 const Promotion = () => {
   const promotionCode = "529814";
-  const promotionLink =
-    "https://mantrishop.in/#/pages/person/register?r_code=529814";
+  const promotionLink = "/register?r_code=529814";
 
   const copyLink = () => {
     navigator.clipboard.writeText(promotionLink);

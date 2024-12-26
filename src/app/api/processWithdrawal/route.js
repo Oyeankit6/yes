@@ -9,6 +9,8 @@ export async function POST(req) {
 
     // Parse request body
     const { loggedinUser, amount, method, paymentDetails } = await req.json();
+
+    console.log(loggedinUser, amount, method, paymentDetails);
     const userId = loggedinUser._id;
 
     // Validate required fields
@@ -21,6 +23,8 @@ export async function POST(req) {
 
     // Fetch the logged-in user's details from the database
     const user = await User.findById(userId);
+
+    console.log(user);
 
     if (!user) {
       return new Response(JSON.stringify({ error: "User not found" }), {
