@@ -22,17 +22,19 @@ const crowns = [
 const CrownGrid = () => {
   return (
     <>
-      <div className={styles.gridContainer}>
-        {crowns.map((crown) => (
-          <div key={crown.id} className={styles.crownCard}>
-            <img
-              src={crown.imageUrl}
-              alt={crown.name}
-              className={styles.crownImage}
-            />
-            <p className={styles.crownName}>{crown.name}</p>
-          </div>
-        ))}
+      <div className="bigContainer">
+        <div className={styles.gridContainer}>
+          {crowns.map((crown) => (
+            <div key={crown.id} className={styles.crownCard}>
+              <img
+                src={crown.imageUrl}
+                alt={crown.name}
+                className={styles.crownImage}
+              />
+              <p className={styles.crownName}>{crown.name}</p>
+            </div>
+          ))}
+        </div>
       </div>
     </>
   );

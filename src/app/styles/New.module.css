@@ -1,34 +1,93 @@
-/* styles/CrownGrid.module.css */
-
+/* Grid container for crowns */
 .gridContainer {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-  gap: 20px;
-  padding: 0 20px;
+  margin-top: 20px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  padding: 0 2rem;
+
+  margin-bottom: 4.7rem;
 }
 
+/* Crown card styling */
 .crownCard {
-  border: 1px solid #eee;
-  border-radius: 10px;
-  background-color: #fff;
+  padding: 5px;
+  border-radius: 6px;
+  width: 46%; /* Two cards per row */
+  margin: 5px 2%;
+  background-color: white;
+  position: relative;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  opacity: 0;
+  transform: translateY(-50px);
+  animation: dropDown 0.8s ease forwards;
   transition: box-shadow 0.3s ease;
-  text-align: center;
-  padding: 20px;
 }
 
 .crownCard:hover {
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
 }
 
+/* Crown image */
 .crownImage {
+  height: 15rem;
   width: 100%;
-  height: auto;
-  border-radius: 10px;
-  margin-bottom: 15px;
+  object-fit: contain;
+  border-radius: 6px;
+  transition: transform 0.3s ease;
 }
 
+.crownCard:hover .crownImage {
+  transform: scale(1.05);
+}
+
+/* Crown name styling */
 .crownName {
-  font-size: 16px;
-  color: #333;
+  font-size: 0.8rem;
+  text-align: center;
+  color: #666666;
+  margin: 10px 0;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .crownCard {
+    width: 46%; /* Two items per row for tablets */
+    margin: 5px 2%;
+  }
+
+  .gridContainer {
+    padding: 0 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .crownImage {
+    height: 15rem; /* Reduce image height on smaller screens */
+  }
+
+  .crownName {
+    font-size: 0.7rem; /* Adjust text size for smaller screens */
+  }
+
+  .crownCard {
+    width: 48%; /* Two cards per row for mobile screens */
+    margin: 5px 1%; /* Add a bit of spacing */
+  }
+
+  .gridContainer {
+    padding: 0 0.5rem;
+  }
+}
+
+/* Drop-down animation */
+@keyframes dropDown {
+  0% {
+    transform: translateY(-50px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
 }

@@ -6,7 +6,7 @@ const Layout = ({ children }) => {
   const router = useRouter();
 
   // Define routes where the layout should NOT be rendered
-  const excludedRoutes = ["/MyProfile", "/Admin", "/Admin/*"];
+  const excludedRoutes = [, "/Admin", "/Admin/*"];
 
   // Check if the current route matches any excluded route
   const isExcluded = excludedRoutes.some((route) => {

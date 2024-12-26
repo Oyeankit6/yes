@@ -71,12 +71,14 @@ const ParityRecordTable = () => {
                   <td style={{ color: "#666666" }}>400000</td>
                   <td
                     className={
-                      categoryData.number % 2 === 0
-                        ? styles.oddNumber
-                        : styles.evenNumber
+                      categoryData.number === 0
+                        ? styles.zeroNumber
+                        : categoryData.number % 2 === 0
+                        ? styles.evenNumber
+                        : styles.oddNumber
                     }
                   >
-                    {categoryData.number}
+                    {categoryData.number ? categoryData.number : "0"}
                   </td>
                   <td>
                     <span

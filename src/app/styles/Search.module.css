@@ -1,31 +1,40 @@
-/* styles/Search.module.css */
+/* Search bar container */
 .searchContainer {
   display: flex;
   justify-content: center;
-  margin-bottom: 20px;
+  margin: 20px 0;
 }
 
 .searchBar {
-  width: 50%;
+  width: 80%;
   padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 20px;
-  font-size: 16px;
+  border-radius: 6px;
+  border: 1px solid #ddd;
+  font-size: 1rem;
 }
 
+/* Grid container for products */
 .gridContainer {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-  gap: 20px;
-  padding: 0 20px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  padding: 0 2rem;
+
+  margin-bottom: 4.7rem;
 }
 
+/* Product card styling */
 .productCard {
-  border: 1px solid #eee;
-  border-radius: 10px;
-  padding: 15px;
-  background-color: #fff;
+  padding: 5px;
+  border-radius: 6px;
+  width: 46%; /* Two cards per row */
+  margin: 5px 2%;
+  background-color: white;
+  position: relative;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  opacity: 0;
+  transform: translateY(-50px);
+  animation: dropDown 0.8s ease forwards;
   transition: box-shadow 0.3s ease;
 }
 
@@ -33,25 +42,77 @@
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
 }
 
-.productInfo {
+/* Product image */
+.productImage {
+  height: 200px !important;
+  width: 100%;
+  object-fit: contain;
+  border-radius: 6px;
+  transition: transform 0.3s ease;
+}
+
+.productCard:hover .productImage {
+  transform: scale(1.05);
+}
+
+/* Product details */
+.productName {
+  font-size: 0.8rem;
   text-align: center;
-  margin-bottom: 10px;
+  color: #666666;
+  margin: 10px 0;
 }
 
 .productPrice {
-  font-size: 18px;
+  color: #f37b1d;
+  font-size: 0.9rem;
   font-weight: bold;
-  color: #ff5722;
+  text-align: center;
 }
 
-.productName {
-  font-size: 14px;
-  color: #666;
-  margin-top: 5px;
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .productCard {
+    width: 46%; /* Two items per row for tablets */
+    margin: 5px 2%;
+  }
+
+  .gridContainer {
+    padding: 0 1rem;
+  }
+
+  .searchBar {
+    width: 90%; /* Adjust search bar for smaller screens */
+  }
 }
 
-.productImage {
-  width: 100%;
-  border-radius: 10px;
-  margin-top: 10px;
+@media (max-width: 480px) {
+  .productImage {
+    height: 10rem; /* Reduce image height on smaller screens */
+  }
+
+  .productName {
+    font-size: 0.7rem; /* Adjust text size for smaller screens */
+  }
+
+  .productCard {
+    width: 48%; /* Two cards per row for mobile screens */
+    margin: 5px 1%; /* Add a bit of spacing */
+  }
+
+  .gridContainer {
+    padding: 0 0.5rem;
+  }
+}
+
+/* Drop-down animation */
+@keyframes dropDown {
+  0% {
+    transform: translateY(-50px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
 }
