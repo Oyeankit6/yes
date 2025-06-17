@@ -25,9 +25,6 @@ const Login = () => {
 
       if (res.ok) {
         toast.success("Login Successful!");
-        setTimeout(() => {
-          router.push("/Win");
-        }, 700);
       } else {
         const errorData = await res.json();
         toast.error(`Login failed: ${errorData.message}`);
@@ -37,6 +34,8 @@ const Login = () => {
       console.error("Error during login:", error);
     } finally {
       setLoading(false);
+
+      router.push("/Win");
     }
   };
 

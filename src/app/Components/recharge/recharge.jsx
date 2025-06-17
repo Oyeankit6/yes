@@ -91,7 +91,7 @@ export default function RechargePage() {
         <footer className="tips">
           <p style={{ backgroundColor: "white" }}>
             Tips: Please contact{" "}
-            <a href="mailto:mantrivip@mantrivip.com">mantrivip@mantrivip.com</a>{" "}
+            <a href="mailto:mantrimaal001@gmail.com">mantrimaal001@gmail.com</a>{" "}
             if you have any questions about the order or payment failure.
           </p>
         </footer>
